@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/landing';
 
     /**
      * Create a new authentication controller instance.
@@ -68,5 +68,12 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect()->back();
     }
 }
