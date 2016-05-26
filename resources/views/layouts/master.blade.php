@@ -11,32 +11,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('resources/assets/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="resources/assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('resources/assets/css/ionicons.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="resources/assets/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="{{ asset('resources/assets/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link rel="stylesheet" href="resources/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <link rel="stylesheet" href="resources/assets/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="resources/assets/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="{{ asset('resources/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/assets/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/assets/css/skins/skin-blue.min.css') }}">
+    <script type="text/javascript"> var baseUrl = "{{url('/')}}";</script>
+
+
 
 
     <!-- galery style -->
-     <link rel="stylesheet" href="resources/assets/css/galery.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="{{ asset('resources/dist/sweetalert.css') }}">
 
+     <link rel="stylesheet" href="{{ asset('resources/assets/css/galery.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/assets/css/lightbox.css') }}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" >
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -58,7 +65,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-red  sidebar-mini   ">
+<body class="hold-transition skin-black  sidebar-mini   ">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -97,7 +104,7 @@ desired effect
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="resources/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <img src="{{ Auth::user()->profile_pic==NULL ? URL::asset('resources/assets/img/pro.jpg') : URL::asset(Auth::user()->profile_pic) }}" class="img-circle" alt="User Image">
                                             </div>
                                             <!-- Message title and timestamp -->
                                             <h4>
@@ -172,34 +179,26 @@ desired effect
                         </ul>
                     </li>
                     <!-- User Account Menu -->
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
+                    @else
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="resources/assets/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="{{ Auth::user()->profile_pic==NULL ? URL::asset('resources/assets/img/pro.jpg') : URL::asset(Auth::user()->profile_pic) }}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="resources/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="{{ Auth::user()->profile_pic==NULL ? URL::asset('resources/assets/img/pro.jpg') : URL::asset(Auth::user()->profile_pic) }}" class="img-circle" alt="User Image">
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    {{ Auth::user()->name }}
                                 </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -207,13 +206,14 @@ desired effect
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
+                        @endif
                     <!-- Control Sidebar Toggle Button -->
-                    
+
                 </ul>
             </div>
         </nav>
@@ -227,12 +227,10 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="resources/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="{{ Auth::user()->profile_pic==NULL ? URL::asset('resources/assets/img/pro.jpg') : URL::asset(Auth::user()->profile_pic) }}"  class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>{{ Auth::user()->name }}</p>
                 </div>
             </div>
 
@@ -255,7 +253,7 @@ desired effect
                 <li><a href="{{url('/site')}}"><i class="fa fa-desktop"></i> <span>MY Sites</span></a></li>
                 <li><a href="{{url('/temp')}}"><i class="fa fa-television"></i> <span>My Templates</span></a></li>
                 <li><a href="{{url('/profile')}}"><i class="fa fa-user"></i> <span>My Profile</span></a></li>
-                <li><a href="{{url('/galery')}}"><i class="fa fa-photo"></i> <span>My galery</span></a></li>
+                <li><a href="{{url('/gallery/list')}}"><i class="fa fa-photo"></i> <span>My galery</span></a></li>
             </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
@@ -263,17 +261,7 @@ desired effect
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Page Header
-                <small>Optional description</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">Here</li>
-            </ol>
-        </section>
+
 
         <!-- Main content -->
         <section class="content">
@@ -296,22 +284,49 @@ desired effect
 
 
 <!-- jQuery 2.1.4 -->
-<script src="resources/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="{{ asset('resources/assets/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="resources/assets/js/bootstrap.min.js"></script>
+<script src="{{ asset('resources/assets/js/bootstrap.min.js')}}"></script>
 <!-- FastClick -->
-<script src="resources/assets/plugins/fastclick/fastclick.min.js"></script>
+<script src="{{ asset('resources/assets/plugins/fastclick/fastclick.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="resources/assets/js/app.min.js"></script>
+<script src="{{ asset('resources/assets/js/app.min.js')}}"></script>
 <!-- Sparkline -->
-<script src="resources/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="{{ asset('resources/assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+{{--<script src="{{ asset('resources/assets/js/lol.js')}}"></script>--}}
 
 
 
    <!-- Galery -->  
 <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-<script src="resources/assets/js/galery.js"></script>
-<script src="resources/assets/js/g2.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+<script src="{{ asset('resources/dist/sweetalert.min.js')}}"></script>
+<script src="{{ asset('resources/assets/js/galery.js')}}"></script>
+<script src="{{ asset('resources/assets/js/alert.js')}}"></script>
+<script src="{{ asset('resources/assets/js/lightbox.js')}}"></script>
+<!-- InputMask -->
+<!-- Select2 -->
+<script src="{{ asset('resources/assets/plugins/select2/select2.full.min.js')}}"></script>
+<script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.js')}}"></script>
+<script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+<script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
+
+
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+
+    });
+</script>
 
 
 </body>
