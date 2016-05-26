@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 
 
 
@@ -7,24 +7,159 @@
 
 
   <div class="row">
+
     <div class="col-md-3">
+
+      <!-- Modal for fb-->
+      <div class=" modal-default">
+      <div id="fb" class="modal fade" role="dialog">
+
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Paste your profile link here.</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" role="form" method="post" action="{{ url('/userLINK') }}">
+
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="hidden" name="id" value="{{Auth::user()->id}}" />
+
+              <div class="form-group">
+                <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="submission_fb" name="fb" placeholder="Paste the Facebook Profile Link" value="{{Auth::user()->fb}}">
+                </div>
+              </div>
+                <div class="form-group">
+                  <a class="btn btn-social-icon btn-youtube"><i class="fa fa-youtube"></i></a>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="submission_youtube" name="youtube" placeholder="Paste the YouTube Chanel Link" value="{{Auth::user()->youtube}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <a class="btn btn-social-icon btn-google"><i class="fa fa-google"></i></a>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="submission_google" name="google" placeholder="Paste the Google+ Link'" value="{{Auth::user()->google}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="submission_twiter"  name="twiter" placeholder="Paste the Twitter Profile Link" value="{{Auth::user()->twiter}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <a class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="submission_instagram"  name="instagram" placeholder="Paste the Istagram Profile Link" value="{{Auth::user()->instagram}}">
+                  </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+              <button type="submit" class="btn btn-danger">Save Links</button>
+            </form>
+            </div>
+          </div>
+
+
+      </div>
+        </div>
+      </div>
+
+
+
+      <!-- Modal for password-->
+      <div class=" modal-default">
+        <div id="pwd" class="modal fade" role="dialog">
+
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Change Password.</h4>
+              </div>
+              <div class="modal-body">
+                <form method="post" action="{{ url('/userpw') }}">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                  <input type="hidden" name="id" value="{{Auth::user()->id}}" />
+
+                  @if(Session::has('pwmessage'))
+                    <div class="alert alert-success">
+                      {{ Session::get('pwmessage') }}
+                    </div>
+                  @endif
+
+                  @if(Session::has('wmessage'))
+                    <div class="alert alert-danger">
+                      {{ Session::get('wmessage') }}
+                    </div>
+                  @endif
+
+                  <div class="form-group">
+                    <label class="control-label">Current Password</label>
+                    <input type="password" id="currentp" class="form-control" name="currentp" /> </div>
+                  <div class="form-group">
+                    <label class="control-label">New Password</label>
+                    <input type="password" id="newp" class="form-control" name="newp"/> </div>
+
+                  {{--                                            @if ($errors->has('newp'))
+                                                                  <span class="help-block">
+                                                                      <strong>{{ $errors->first('newp') }}</strong>
+                                                                  </span>
+                                                              @endif--}}
+
+                  <div class="form-group">
+                    <label class="control-label">Re-type New Password</label>
+                    <input type="password" id="rep" class="form-control" name="rep"/> </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+                <button type="submit" class="btn green" id="btnChange">Change Password
+                </button>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
 
       <!-- Profile Image -->
       <div class="box box-primary">
         <div class="box-body box-profile">
-          <img class="profile-user-img img-responsive img-circle" src="resources/assets/img/photo1.png" alt="User profile picture">
-          <h3 class="profile-username text-center">Nina Mcintire</h3>
-          <p class="text-muted text-center">Software Engineer</p>
+
+          <img class="profile-user-img img-responsive img-circle" src="{{ Auth::user()->profile_pic==NULL ? URL::asset('resources/assets/img/pro.jpg') : URL::asset(Auth::user()->profile_pic) }}" alt="User profile picture">
+          <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+          <p class="text-muted text-center">{{ Auth::user()->job }}</p>
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
               <!-- <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-twitter"></i> <b>Twitter</b></a> -->
               <div class="text-center">
-                    <a class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i></a>
-                    <a class="btn btn-social-icon btn-youtube"><i class="fa fa-youtube"></i></a>
-                    <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
-                    <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
-                    <a class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+                    <a href="{{Auth::user()->google}}" target="_blank"class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i></a>
+                    <a href="{{Auth::user()->youtube}}" target="_blank" class="btn btn-social-icon btn-youtube"><i class="fa fa-youtube"></i></a>
+                    <a href="{{Auth::user()->fb}}" target="_blank"class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="{{Auth::user()->twiter}}" target="_blank" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="{{Auth::user()->instagram}}"target="_blank" class="btn btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></a>
 
               </div>
           </ul>
@@ -45,7 +180,7 @@
           <hr>
 
           <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-          <p class="text-muted">Malibu, California</p>
+          <p class="text-muted">{{Auth::user()->address}}</p>
 
           <hr>
 
@@ -61,7 +196,7 @@
           <hr>
 
           <strong><i class="fa fa-file-text-o margin-r-5"></i> Twiter Feed</strong>
-          <a class="twitter-timeline"  href="https://twitter.com/Castila3" data-widget-id="724097904743309312">Tweets by @Castila3</a>
+          <a class="twitter-timeline"  href="{{Auth::user()->twiter}}" data-widget-id="724097904743309312">Tweets by @{{Auth::user()->name}}</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
         </div><!-- /.box-body -->
@@ -71,13 +206,14 @@
     <div class="col-md-9">
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#activity" data-toggle="tab">Activity Feed</a></li>
-          <li><a href="#timeline" data-toggle="tab">My Posts</a></li>
-          <li><a href="#galery" data-toggle="tab">Galery</a></li>
-          <li><a href="#settings" data-toggle="tab">Edit Profile</a></li>
+          <li class="active"><a href="#settings" data-toggle="tab">Edit Profile</a></li>
+
+
+
+
         </ul>
         <div class="tab-content">
-          <div class="active tab-pane" id="activity">
+          <div class=" tab-pane" id="activity">
 
 
             <!-- The timeline -->
@@ -120,7 +256,7 @@
             <!-- Post -->
             <div class="post">
               <div class="user-block">
-                <img class="img-circle img-bordered-sm" src="resources/assets/img/user1-128x128.jpg" alt="user image">
+                <img class="img-circle img-bordered-sm" src="{{URL::asset('resources/assets/img/pro.jpg')}}" alt="user image">
                         <span class='username'>
                           <a href="#">Jonathan Burke Jr.</a>
                           <a href='#' class='pull-right btn-box-tool'><i class='fa fa-times'></i></a>
@@ -139,116 +275,154 @@
             </div><!-- /.post -->
           </div><!-- /.tab-pane -->
 
-          <div class=" tab-pane" id="galery">
-            <div class="row">
-              <div class='list-group gallery'>
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                  <a class="thumbnail fancybox" rel="ligthbox" href="resources/assets/img/photo1.png">
-                    <img class="img-responsive" alt="" src="resources/assets/img/photo1.png" />
-                    <div class='text-right'>
-                      <small class='text-muted'>Image Title</small>
-                    </div> <!-- text-right / end -->
-                  </a>
-                </div> <!-- col-6 / end -->
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                  <a class="thumbnail fancybox" rel="ligthbox" href="resources/assets/img/photo1.png">
-                    <img class="img-responsive" alt="" src="resources/assets/img/photo1.png" />
-                    <div class='text-right'>
-                      <small class='text-muted'>Image Title</small>
-                    </div> <!-- text-right / end -->
-                  </a>
-                </div> <!-- col-6 / end -->
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                  <a class="thumbnail fancybox" rel="ligthbox" href="resources/assets/img/photo1.png">
-                    <img class="img-responsive" alt="" src="resources/assets/img/photo1.png" />
-                    <div class='text-right'>
-                      <small class='text-muted'>Image Title</small>
-                    </div> <!-- text-right / end -->
-                  </a>
-                </div> <!-- col-6 / end -->
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                  <a class="thumbnail fancybox" rel="ligthbox" href="resources/assets/img/photo1.png">
-                    <img class="img-responsive" alt="" src="resources/assets/img/photo1.png" />
-                    <div class='text-right'>
-                      <small class='text-muted'>Image Title</small>
-                    </div> <!-- text-right / end -->
-                  </a>
-                </div> <!-- col-6 / end -->
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                  <a class="thumbnail fancybox" rel="ligthbox" href="resources/assets/img/photo1.png">
-                    <img class="img-responsive" alt="" src="resources/assets/img/photo1.png" />
-                    <div class='text-right'>
-                      <small class='text-muted'>Image Title</small>
-                    </div> <!-- text-right / end -->
-                  </a>
-                </div> <!-- col-6 / end -->
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-                  <a class="thumbnail fancybox" rel="ligthbox" href="resources/assets/img/photo1.png">
-                    <img class="img-responsive" alt="" src="resources/assets/img/photo1.png" />
-                    <div class='text-right'>
-                      <small class='text-muted'>Image Title</small>
-                    </div> <!-- text-right / end -->
-                  </a>
-                </div> <!-- col-6 / end -->
-              </div> <!-- list-group / end -->
-            </div> <!-- row / end -->
 
+          <div class="active tab-pane" id="settings">
+            @if(Session::has('message'))
+              <div class="alert alert-success">
+                {{ Session::get('message') }}
+              </div>
+            @endif
+            <form class="form-horizontal" id="pro" role="form" method="post" action="{{ url('/user') }}">
 
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+              <input type="hidden" name="id" value="{{Auth::user()->id}}" />
 
-
-          </div><!-- /.tab-pane -->
-
-          <div class="tab-pane" id="settings">
-            <form class="form-horizontal">
               <div class="form-group">
-                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <label class="col-sm-2 control-label">Full Name</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="inputName" placeholder="Name">
+                  <input type="text" class="form-control" id="submission_name"  name="name" placeholder="Name" value="{{Auth::user()->name}}">
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                <label  class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                  <input type="email" class="form-control" id="submission_email" name="email" placeholder="Enter your Email Address" value="{{Auth::user()->email}}">
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <label  class="col-sm-2 control-label">Status</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputName" placeholder="Name">
+                  <input type="text" class="form-control" id="submission_status" name="status" placeholder="Maried Or Unmaried" value="{{Auth::user()->status}}">
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                <label  class="col-sm-2 control-label">Date Of Birth</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                    </label>
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control" id="submission_BOD" name="BOD" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="{{Auth::user()->BOD}}">
                   </div>
                 </div>
               </div>
               <div class="form-group">
+                <label  class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-10">
+                  <input type="textarea" class="form-control" id="submission_address" name="address" placeholder="Entter Your Address" value="{{Auth::user()->address}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">Empolyment</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="submission_job" name="job" placeholder="Enter your Job" value="{{Auth::user()->job}}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">Mobile No</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-phone"></i>
+                    </div>
+                    <input type="text" id="submission_mobile" name="mobile" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask value="{{Auth::user()->mobile}}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-danger">Submit</button>
+                  <button id="profdata" type="submit" class="btn btn-danger" id="btnSubmit"  >Submit</button>
                 </div>
               </div>
             </form>
-          </div><!-- /.tab-pane -->
-        </div><!-- /.tab-content -->
-      </div><!-- /.nav-tabs-custom -->
-    </div><!-- /.col -->
-  </div><!-- /.row -->
 
-@endsection
+
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Change The Password</h3>
+              </div>
+              <div class="box-body">
+                <a class="btn btn-block btn-info" data-toggle="modal" data-target="#pwd">Change Password</a>
+
+              </div>
+            </div>
+                                <!-- profile pic -->
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Change The Profile Pciture</h3>
+              </div>
+              <div class="box-body">
+
+
+                <form method="post" action="{{ url('/user/pic') }}" enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                  <input type="hidden" name="id" value="{{Auth::user()->id}}" />
+                  <div class="form-group">
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                      <div class="fileinput-new thumbnail" style="width: 222px; height: 205px;">
+                        <img src="{{Auth::user()->profile_pic==NULL ? URL::asset('resources/assets/img/pro.jpg') : URL::asset(Auth::user()->profile_pic) }}" alt="" /> </div>
+                      <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 222px; max-height: 205px;"> </div>
+                      <div>
+                                                                            <span class="btn default btn-file">
+                                                                                <label for="profile_pic">Choose an Image</label>
+                                                                                <input id="profile_pic" name="profile_pic" type="file">
+                                                                            </span>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="margin-top-10">
+                                                <span>
+                                                    <button type="submit" class="btn green" id="btnSubmitPro">Upload Profile Picture
+                                                    </button>
+                                                </span>
+                    <button type="button" class="btn default" id="btnRemove">Remove
+                    </button>
+
+                </div>
+                </form>
+              </div>
+            </div>
+
+
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Paste Your Social Profile Link Here...</h3>
+              </div>
+              <div class="box-body">
+
+
+                <a class="btn btn-block btn-default" data-toggle="modal" data-target="#fb">
+                  <i class="fa fa-facebook"></i><i class="fa fa-google-plus"></i><i class="fa fa-instagram"></i><i class="fa fa-twitter"></i><i class="fa fa-youtube"></i> Enter your Profile Links
+                </a>
+                </div>
+              </div>
+
+
+
+
+          </div><!-- /.tab-pane -->
+
+
+
+                    </div><!-- /.tab-content -->
+
+
+
+                  </div><!-- /.nav-tabs-custom -->
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+
+
+            @endsection

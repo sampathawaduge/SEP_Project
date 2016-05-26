@@ -1,24 +1,32 @@
-jQuery(document).ready(function($) {
 
-    $('#myCarousel').carousel({
-        interval: 5000
-    });
 
-    //Handles the carousel thumbnails
-    $('[id^=carousel-selector-]').click(function () {
-        var id_selector = $(this).attr("id");
-        try {
-            var id = /-(\d+)$/.exec(id_selector)[1];
-            console.log(id_selector, id);
-            jQuery('#myCarousel').carousel(parseInt(id));
-        } catch (e) {
-            console.log('Regex failed!', e);
+$(function() {
+    Dropzone.options.addImages= {
+        maxFilesize : 10,
+        acceptedFiles:'image/*',
+        success:function(file, response){
+            if(file.status == 'success'){
+                handleDropzoneFileUpload.handleSuccess(response);
+            }else {
+                handleDropzoneFileUpload.handleError(response);
+            }
         }
-    });
-    // When the carousel slides, auto update the text
-    $('#myCarousel').on('slid.bs.carousel', function (e) {
-        var id = $('.item.active').data('slide-number');
-        $('#carousel-text').html($('#slide-content-'+id).html());
-    });
+    };
+
+    var handleDropzoneFileUpload = {
+        handleError:function(response){
+            console.log(response);
+        },
+        handleSuccess:function(response){
+            var imageList= $('#gallery-images ul');
+            var imageSrc= baseUrl + '/gallery/images/thumbs/' + response.file_name;
+            $(imageList).append('<li><a href="' + imageSrc + '"><img src="' + imageSrc + '"></a></li> ');
+
+        }
+    };
+});
+
+$(document).ready(function(){
+    console.log('Document is REady!!!');
 });
 
