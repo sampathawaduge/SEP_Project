@@ -248,12 +248,21 @@ desired effect
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
                 <li class="header">HEADER</li>
+                <?php $admin = 2 ?>;
+                <?php if($admin==0){ ?>
                 <!-- Optionally, you can add icons to the links -->
                 <li ><a href="{{url('/home')}}"><i class="fa fa-home"></i> <span>Home</span></a></li>
                 <li><a href="{{url('/site')}}"><i class="fa fa-desktop"></i> <span>MY Sites</span></a></li>
                 <li><a href="{{url('/temp')}}"><i class="fa fa-television"></i> <span>My Templates</span></a></li>
                 <li><a href="{{url('/profile')}}"><i class="fa fa-user"></i> <span>My Profile</span></a></li>
                 <li><a href="{{url('/gallery/list')}}"><i class="fa fa-photo"></i> <span>My galery</span></a></li>
+                <?php }if($admin==2){ ?>
+                <li ><a href="{{url('/home')}}"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="{{url('/templates/new')}}"><i class="fa fa-desktop"></i> <span>Add Template</span></a></li>
+                <li><a href="{{url('/templates/edit')}}"><i class="fa fa-desktop"></i> <span>Edit Template</span></a></li>
+                <li><a href="{{url('/ad_user')}}"><i class="fa fa-television"></i> <span>Manage Users</span></a></li>
+                <li><a href="{{url('/reports')}}"><i class="fa fa-user"></i> <span>Get Reports</span></a></li>
+            <?php } ?>
             </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->

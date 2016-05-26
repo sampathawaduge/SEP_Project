@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTemplateTable extends Migration
+class CreateTemlatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,16 @@ class CreateTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::create('template', function (Blueprint $table) {
-            $table->increments('template_id');
+        Schema::create('templates', function (Blueprint $table) {
+
+            $table->increments('id');
             $table->string('description');
-            $table->integer('price');
+            $table->float('price');
+            $table->text('temp_source');
+            $table->text('colour');
+            $table->text('name');
             $table->timestamps();
+
         });
     }
 
@@ -27,6 +32,6 @@ class CreateTemplateTable extends Migration
      */
     public function down()
     {
-        Schema::drop('template');
+        Schema::drop('templates');
     }
 }
