@@ -63,6 +63,22 @@ Route::group(['middleware' => 'web'] , function(){
     Route::get('gallery/view/{id}','GalleryController@viewGalleryPics');
     Route::post('image/do-upload','GalleryController@doImageUpload');
 
+
+    //Admin route
+    //Route::get('/' , 'HomeController@index');
+    Route::get('/templates/new', 'AdminController@index');
+    Route::get('/templates/edit', 'AdminController@view');
+    Route::get('/landing', 'AdminController@view');
+    Route::post('/update' , 'AdminController@update');
+    Route::get('/templates/{temp}/edit' , 'AdminController@edit');
+    Route::get('/templates/show/{temp}' , 'AdminController@show');
+    Route::get('/templates/{temp}/delete' , 'AdminController@delete');
+    Route::post('/templates/{temp}/update' , 'AdminController@update');
+    Route::post('/templates/store', 'AdminController@store');
+
+
+
+
 });
 
 
