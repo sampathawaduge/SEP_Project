@@ -63,6 +63,28 @@ Route::group(['middleware' => 'web'] , function(){
     Route::get('gallery/view/{id}','GalleryController@viewGalleryPics');
     Route::post('image/do-upload','GalleryController@doImageUpload');
 
+    Route::get('/temp','Loaddemo_controller@index');
+    Route::get('/demo','Loaddemo_controller@demo');
+    Route::get('/edit','Loaddemo_controller@edit');
+    Route::get('/live','Loaddemo_controller@live');
+    Route::get('/live_demo','Loaddemo_controller@live_demo');
+    Route::get('/live_about','Loaddemo_controller@live_about');
+    Route::get('/live_post','Loaddemo_controller@live_post');
+    Route::get('/live_contact','Loaddemo_controller@live_contact');
+
+    Route::get('/site','PreviewController@read');
+    Route::post('/insert','PreviewController@insert');
+    Route::get('/post','PreviewController@read');
+    Route::get('/preview/site/{site}','PreviewController@viewsite');
+
+    Route::post('/addpost','PostController@store');
+    Route::get('/updatepost/{id}','PostController@displayupdatefields');
+    Route::get('/delete/{id}','PostController@destroy');
+    Route::post('/update','PostController@update');
+    Route::get('/addpost','Loaddemo_controller@editpost');
+    Route::get('/deletesite/{id}','PreviewController@deletesite');
+//    Route::get()
 });
+
 
 

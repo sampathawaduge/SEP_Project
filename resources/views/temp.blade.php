@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 @section('content')
     <style type="text/css">
         * {
@@ -72,6 +72,7 @@
             color: #08c;
         }
     </style>
+
     <div id="wrapper">
         <div class="grid-block-container">
             <div class="grid-block slide">
@@ -79,7 +80,7 @@
                     <h3>Caption Title</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     <p><a href="{{url('/demo')}}" target="_blank" class="learn-more">Demo</a></p>
-                    <p><a href="#" class="learn-more">Edit</a></p>
+                    <p><a href="{{url('/edit')}}" class="learn-more">Edit</a></p>
                 </div>
                 <img src="{{url('resources/assets/img/2.jpg')}}" style="width:600px;height:300px;"/>
 
