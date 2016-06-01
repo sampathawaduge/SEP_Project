@@ -12,11 +12,16 @@ class CreateTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::create('template', function (Blueprint $table) {
-            $table->increments('template_id');
+        Schema::create('templates', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('description');
             $table->integer('price');
+            $table->text('temp_source');
+            $table->text('colour');
             $table->timestamps();
+            
+            $table->text('name');
+            $table->string('temp_pic');
         });
     }
 
@@ -27,6 +32,6 @@ class CreateTemplateTable extends Migration
      */
     public function down()
     {
-        Schema::drop('template');
+        Schema::drop('templates');
     }
 }
