@@ -1,12 +1,13 @@
 @extends('layouts.master')
     @section('content')
-
+        <div class="container">
+        <div class="row">
         <div class="box box-info">
             <div class="box-header with-border">
                 <h3 class="box-title">Add Post</h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="post" action="{{url('/addpost')}}">
+            <form class="form-horizontal" method="post" action="{{url('/addpost')}}" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="box-body">
                     <div class="form-group">
@@ -22,8 +23,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input type="file" name="file">
+                        <label for="inputPassword3" class="col-sm-2 control-label">ImageName</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="imgname" placeholder="Name.." name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="fileinput fileinpu-new" data-provides="fileinput">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="file" name="image" id="image">
+                            </div>
                         </div>
                     </div>
                 </div><!-- /.box-body -->
@@ -56,7 +65,7 @@
                                     {{$value->description}}
                                 </td>
                                 <td>
-                                    NULL
+                                    <img src="{{url('resources/assets/img/postpreviewimage/'.$value->image)}}">
                                 </td>
                                 <td>
                                     {{$value->created_at}}
@@ -74,5 +83,7 @@
                 </div><!-- /.box-body -->
 
             </div><!-- /.box -->
+        </div>
+        </div>
 
                @endsection
