@@ -19,7 +19,6 @@ class CreateTemplateTable extends Migration
             $table->text('temp_source');
             $table->text('colour');
             $table->timestamps();
-            
             $table->text('name');
             $table->string('temp_pic');
         });

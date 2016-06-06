@@ -345,7 +345,7 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Creat your Profile</h2>
                 <p>You can create your own Profier wbsite</p>
-                <a href="{{url('/profile')}}" class="btn btn-default btn-lg">Create your Website</a>
+                <a href="{{url('/temp')}}" class="btn btn-default btn-lg">Create your Website</a>
             </div>
         </div>
     </div>

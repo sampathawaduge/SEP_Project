@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('resources/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/assets/css/skins/_all-skins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/assets/css/skins/skin-blue.min.css') }}">
-    <script type="text/javascript"> var baseUrl = "{{url('/')}}";</script>
+
 
 
 
@@ -37,6 +37,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('resources/assets/css/lightbox.css') }}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" >
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,6 +48,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- jQuery 2.1.4 -->
     <script src="{{ asset('resources/assets/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{asset('resources/assets/js/animatedModal.min.js')}}"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('resources/assets/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->
@@ -55,6 +59,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Sparkline -->
     <script src="{{ asset('resources/assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     {{--<script src="{{ asset('resources/assets/js/lol.js')}}"></script>--}}
+
+
 
 
 
@@ -277,37 +283,24 @@ desired effect
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
-                <?php $admin = 2 ?>;
-                <?php if($admin==0){ ?>
-                <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li ><a href="{{url('/home')}}"><i class="fa fa-home"></i> <span>Home</span></a></li>
                 <li class="treeview active">
                     <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>Site Details</span>
+                        <i class="fa fa-edit"></i> <span>Site Details</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    <ul class="treeview-menu menu-open" style="display: block;">
-                        <li><a href="{{url('/site')}}"><i class="fa fa-circle-o"></i>MY Sites</a></li>
-                        <li><a href="{{url('/addpost')}}"><i class="fa fa-circle-o"></i>Add Post</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Edit AboutMe</a></li>
-                        <li><a href="{{url('/edit')}}"><i class="fa fa-circle-o"></i>Create Site</a></li>
-                        <li><a href="UI/timeline.html"><i class="fa fa-circle-o"></i>Edit Calender</a></li>
+                    <ul class="treeview-menu" style="display: block;">
+                      <li><a href="{{url('/site')}}"><i class="fa fa-circle-o"></i>My Sites</a></li>
+                      <li><a href="{{url('/showpost')}}"><i class="fa fa-circle-o"></i>Create Post</a></li>
+                      <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
                     </ul>
                 </li>
-                {{--<li><a href="{{url('/site')}}"><i class="fa fa-desktop"></i> <span>MY Sites</span></a></li>--}}
                 <li><a href="{{url('/temp')}}"><i class="fa fa-television"></i> <span>My Templates</span></a></li>
                 <li><a href="{{url('/profile')}}"><i class="fa fa-user"></i> <span>My Profile</span></a></li>
                 <li><a href="{{url('/gallery/list')}}"><i class="fa fa-photo"></i> <span>My galery</span></a></li>
-                    <?php }if($admin==2){ ?>
-                    <li ><a href="{{url('/home')}}"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                    <li><a href="{{url('/templates/new')}}"><i class="fa fa-desktop"></i> <span>Add Template</span></a></li>
-                    <li><a href="{{url('/templates/edit')}}"><i class="fa fa-desktop"></i> <span>Edit Template</span></a></li>
-                    <li><a href="{{url('/ad_user')}}"><i class="fa fa-television"></i> <span>Manage Users</span></a></li>
-                    <li><a href="{{url('/reports')}}"><i class="fa fa-user"></i> <span>Get Reports</span></a></li>
-                    <?php }
-                    ?>
+
+
             </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
@@ -327,12 +320,7 @@ desired effect
 
     <!-- Main Footer -->
 
-
-
-
 </div><!-- ./wrapper -->
-
-
 
 <script>
     $(function () {
@@ -345,6 +333,8 @@ desired effect
         $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
         //Money Euro
         $("[data-mask]").inputmask();
+
+
 
 
     });

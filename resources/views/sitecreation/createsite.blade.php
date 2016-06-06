@@ -9,7 +9,7 @@
             </div><!-- /.box-header -->
             <!-- form start -->
 
-            <form  role="form" method="POST" action="{{url('/insert')}}">
+            <form  role="form" method="POST" action="{{url('/insert/'.$id)}}">
 
                 {{ csrf_field() }}
 

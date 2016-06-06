@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Post;
 use Illuminate\Http\Request;
-
+use App\template;
 use App\Http\Requests;
 
 class Loaddemo_controller extends Controller
@@ -18,7 +18,10 @@ class Loaddemo_controller extends Controller
     }
     public function index()
     {
-        return view('/temp');
+        $template=template::all()->toArray();
+        // return $template[0];
+        // var_dump($template)
+        return view('temp',compact('template'));
     }
     public function demo()
     {
@@ -37,11 +40,12 @@ class Loaddemo_controller extends Controller
     {
         return view('Templates.contact');
     }
-    public function edit()
+    public function edit($id)
     {
 //        return view('Edit_form.form');
 ////        return view('sites.mysite');
-          return view('sitecreation.createsite');
+          return view('sitecreation.createsite')->with('id',$id);
+
     }
     public function editpost()
     {
@@ -69,7 +73,7 @@ class Loaddemo_controller extends Controller
     {
         return view('EditTemplate.Tem1.contact');
     }
-    
+
 
 
 }

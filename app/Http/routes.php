@@ -63,6 +63,18 @@ Route::group(['middleware' => 'web'] , function(){
     Route::get('gallery/view/{id}','GalleryController@viewGalleryPics');
     Route::post('image/do-upload','GalleryController@doImageUpload');
 
+    Route::get('/temp','Loaddemo_controller@index');//sameera
+    Route::get('/edit/{id}','Loaddemo_controller@edit');//sameera
+    Route::post('/insert/{id}','PreviewController@insert');//sameera
+    Route::get('preview/site/{id}','PreviewController@viewsite');//sameera
+    Route::get('/site','PreviewController@read');//sameera
+    Route::get('deletesite/{siteid}','PreviewController@deletesite');//sameera
+    Route::get('/showpost','Loaddemo_controller@editpost');//sameera
+    Route::post('/addpost','PostController@store');//sameera
+    Route::get('delete/{id}','PostController@destroy');//sameera
+    Route::get('/updatepostshow/{id}','PostController@displayupdatefields');//sameera
+    Route::post('/update','PostController@update');//sameera
+    Route::get('/updatetemp/{id}','PreviewController@updatetemplateid');//sameera
+
+
 });
-
-

@@ -74,7 +74,7 @@
                                     <a href="{{url('/delete/'.$value->siteid)}}"><input type="button" class="btn btn-success" value="Delete" ></a>
                                 </td>
                                 <td>
-                                    <a href="{{url('/updatepost/'.$value->siteid)}}"><input type="button" class="btn btn-success" value="Update"></a>
+                                    <a href="{{url('/updatepostshow/'.$value->siteid)}}"><input type="button" class="btn btn-success" value="Update"></a>
                                 </td>
                             <tr>
                         @endforeach
