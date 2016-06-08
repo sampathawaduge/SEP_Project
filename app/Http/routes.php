@@ -11,9 +11,9 @@
 |
 */
 
-//Route::get('/a', function () {
-//    return view('a');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 //Route::get('/landing', function () {
 //    return view('landing');
 //});
@@ -63,6 +63,18 @@ Route::group(['middleware' => 'web'] , function(){
     Route::get('gallery/view/{id}','GalleryController@viewGalleryPics');
     Route::post('image/do-upload','GalleryController@doImageUpload');
 
+    Route::get('/temp','Loaddemo_controller@index');//sameera
+    Route::get('/edit/{id}','Loaddemo_controller@edit');//sameera
+    Route::post('/insert/{id}','PreviewController@insert');//sameera
+    Route::get('preview/site/{id}','PreviewController@viewsite');//sameera
+    Route::get('/site','PreviewController@read');//sameera
+    Route::get('deletesite/{siteid}','PreviewController@deletesite');//sameera
+    Route::get('/showpost','Loaddemo_controller@editpost');//sameera
+    Route::post('/addpost','PostController@store');//sameera
+    Route::get('delete/{id}','PostController@destroy');//sameera
+    Route::get('/updatepostshow/{id}','PostController@displayupdatefields');//sameera
+    Route::post('/update','PostController@update');//sameera
+    Route::get('/updatetemp/{id}','PreviewController@updatetemplateid');//sameera
 
     //Admin route
     //Route::get('/' , 'HomeController@index');
@@ -92,11 +104,6 @@ Route::group(['middleware' => 'web'] , function(){
     Route::post('templates/{mail}/reply' , 'MainController@reply_mail');
     //Route::post('templates/{mail}/createmail' , 'MainController@create_mail');
 
-    Route::get('/admin/user/manage', 'AdminController@user_view');
-    Route::get('user/{user}/promote' , 'AdminController@promote');
-    Route::post('user/{user}/demote' , 'AdminController@demote');
-    Route::post('user/{user}/kick-out' , 'AdminController@kickout');
-    Route::get('/admin/user/removed', 'AdminController@re_user_view');
 
 });
 

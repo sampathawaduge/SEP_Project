@@ -72,35 +72,59 @@
             color: #08c;
         }
     </style>
-    <div id="wrapper">
+
+    <!-- <div id="wrapper">
         <div class="grid-block-container">
             <div class="grid-block slide">
                 <div class="caption">
                     <h3>Caption Title</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     <p><a href="{{url('/demo')}}" target="_blank" class="learn-more">Demo</a></p>
-                    <p><a href="#" class="learn-more">Edit</a></p>
+                    <p><a href="{{url('/edit')}}" class="learn-more">Edit</a></p>
                 </div>
                 <img src="{{url('resources/assets/img/2.jpg')}}" style="width:600px;height:300px;"/>
-
             </div>
         </div>
+    </div> -->
+    <div class="container-fluid">
+      @foreach($template as $value=>$key)
+        <div class="row">
+          <div class="col-sm-6">
+            <div id="wrapper">
+                <div class="grid-block-container">
+                    <div class="grid-block slide">
+                        <div class="caption">
+                            <h3>Rs :{{$key['price']}}</h3>
+                            <p>{{$key['description']}}</p>
+                            <p><a href="{{url('/demo')}}" target="_blank" class="learn-more">Demo</a></p>
+                            <p><a href="{{url('/edit/'.$key["id"])}}" class="learn-more">Edit</a></p>
+                        </div>
+                        <img src="{{url('resources/assets/img/2.jpg')}}" style="width:600px;height:300px;"/>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </div>
-
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.slide').hover(
                     function(){
-                        $(this).find('.caption').slideDown(500);
+                        $(this).find('.caption').slideDown(550);
                     },
                     function(){
-                        $(this).find('.caption').slideUp(500);
+                        $(this).find('.caption').slideUp(550);
                     }
             );
         });
     </script>
+
+
+
+
 
 
 @endsection

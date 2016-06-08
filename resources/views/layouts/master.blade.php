@@ -38,12 +38,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('resources/assets/css/lightbox.css') }}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" >
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="{{ asset('resources/assets/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{asset('resources/assets/js/animatedModal.min.js')}}"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="{{ asset('resources/assets/js/bootstrap.min.js')}}"></script>
+    <!-- FastClick -->
+    <script src="{{ asset('resources/assets/plugins/fastclick/fastclick.min.js')}}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('resources/assets/js/app.min.js')}}"></script>
+    <!-- Sparkline -->
+    <script src="{{ asset('resources/assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    {{--<script src="{{ asset('resources/assets/js/lol.js')}}"></script>--}}
+
+
+
+
+
+            <!-- Galery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+    <script src="{{ asset('resources/dist/sweetalert.min.js')}}"></script>
+    <script src="{{ asset('resources/assets/js/galery.js')}}"></script>
+    <script src="{{ asset('resources/assets/js/alert.js')}}"></script>
+    <script src="{{ asset('resources/assets/js/lightbox.js')}}"></script>
+    <!-- InputMask -->
+    <!-- Select2 -->
+    <script src="{{ asset('resources/assets/plugins/select2/select2.full.min.js')}}"></script>
+    <script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.js')}}"></script>
+    <script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+    <script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
+
+
 
 </head>
 <!--
@@ -248,15 +284,24 @@ desired effect
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
-                <?php $admin = 2 ?>;
-                <?php if($admin==0){ ?>
-                <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li ><a href="{{url('/home')}}"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="{{url('/site')}}"><i class="fa fa-desktop"></i> <span>MY Sites</span></a></li>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-edit"></i> <span>Site Details</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                      <li><a href="{{url('/site')}}"><i class="fa fa-circle-o"></i>My Sites</a></li>
+                      <li><a href="{{url('/showpost')}}"><i class="fa fa-circle-o"></i>Create Post</a></li>
+                      <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                    </ul>
+                </li>
                 <li><a href="{{url('/temp')}}"><i class="fa fa-television"></i> <span>My Templates</span></a></li>
                 <li><a href="{{url('/profile')}}"><i class="fa fa-user"></i> <span>My Profile</span></a></li>
                 <li><a href="{{url('/gallery/list')}}"><i class="fa fa-photo"></i> <span>My galery</span></a></li>
+
+
                     <?php }if($admin==2){ ?>
                     <li ><a href="{{url('/admin/home')}}"><i class="fa fa-home"></i><span>Home</span></a></li>
                     <li><a href="{{url('/templates/new')}}"><i class="fa fa-plus-square" aria-hidden="true"></i> <span>Add Template</span></a></li>
@@ -286,45 +331,8 @@ desired effect
     </div><!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-
-    </footer>
-
-
-
-
 
 </div><!-- ./wrapper -->
-
-
-<!-- jQuery 2.1.4 -->
-<script src="{{ asset('resources/assets/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
-<!-- Bootstrap 3.3.5 -->
-<script src="{{ asset('resources/assets/js/bootstrap.min.js')}}"></script>
-<!-- FastClick -->
-<script src="{{ asset('resources/assets/plugins/fastclick/fastclick.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('resources/assets/js/app.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{ asset('resources/assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
-{{--<script src="{{ asset('resources/assets/js/lol.js')}}"></script>--}}
-
-
-
-   <!-- Galery -->  
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
-<script src="{{ asset('resources/dist/sweetalert.min.js')}}"></script>
-<script src="{{ asset('resources/assets/js/galery.js')}}"></script>
-<script src="{{ asset('resources/assets/js/alert.js')}}"></script>
-<script src="{{ asset('resources/assets/js/lightbox.js')}}"></script>
-<!-- InputMask -->
-<!-- Select2 -->
-<script src="{{ asset('resources/assets/plugins/select2/select2.full.min.js')}}"></script>
-<script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.js')}}"></script>
-<script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
-<script src="{{ asset('resources/assets/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
-
 
 <script>
     $(function () {
@@ -337,6 +345,8 @@ desired effect
         $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
         //Money Euro
         $("[data-mask]").inputmask();
+
+
 
 
     });
