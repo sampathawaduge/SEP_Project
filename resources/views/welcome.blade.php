@@ -282,34 +282,34 @@
 
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+
+        <?php $i = 1; ?>
+        @foreach($image as $img)
+        <li data-target="#myCarousel" data-slide-to= <?php $i ?> ></li>
+            <?php $i++; ?>
+        @endforeach
     </ol>
 
     <!-- Wrapper for Slides -->
     <div class="carousel-inner">
+        @foreach($imagefirst as $first)
         <div class="item active">
             <!-- Set the first background image using inline CSS below. -->
-            <div class="fill" style="background-image:url('resources/assets/img/2.jpg');"></div>
+            <div class="fill" style="background-image:url({{ url("resources/assets/img/" . $first->slide_pic) }})"></div>
             <div class="carousel-caption">
-
-                <h2>Caption 1</h2>
+                <h2><?php echo $first->description ?></h2>
             </div>
         </div>
-        <div class="item">
-            <!-- Set the second background image using inline CSS below. -->
-            <div class="fill" style="background-image:url('resources/assets/img/1.jpg');"></div>
-            <div class="carousel-caption">
-                <h2>Caption 2</h2>
+        @endforeach
+        @foreach($image as $img)
+            <div class="item">
+                <!-- Set the second background image using inline CSS below. -->
+                <div class="fill" style="background-image:url({{ url("resources/assets/img/" . $img->slide_pic) }}"></div>
+                <div class="carousel-caption">
+                    <h2><?php echo $img->description ?></h2>
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <!-- Set the third background image using inline CSS below. -->
-            <div class="fill" style="background-image:url('resources/assets/img/3.jpg');"></div>
-            <div class="carousel-caption">
-                <h2>Caption 3</h2>
-            </div>
-        </div>
+        @endforeach
     </div>
 
     <!-- Controls -->
@@ -356,7 +356,7 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
             <h2>Contact us Profiler.net</h2>
-            <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
+            {{--<p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>--}}
 
             </p>
             <ul class="list-inline banner-social-buttons">
@@ -370,6 +370,61 @@
                     <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
                 </li>
             </ul>
+        </div>
+        <div id="google-map" class="wow fadeIn" data-latitude="52.365629" data-longitude="4.871331" data-wow-duration="1000ms" data-wow-delay="400ms"></div>
+        <div id="contact-us" class="parallax">
+            <div class="container">
+                <div class="row">
+                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        {{--<h2>Contact Us</h2>--}}
+                        {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam</p>--}}
+                    </div>
+                </div>
+                <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <form id="main-contact-form" name="contact-form" method="post" action="{{ url('templates/mail')  }}">
+
+                                {{ csrf_field() }}
+
+                                <div class="row  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Name" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" placeholder="Email Address" required="required">
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="subject" class="form-control" placeholder="Subject" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="message" id="message" class="form-control" rows="4" placeholder="Enter your message" required="required"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn-success" name="submit">Send Now</button>
+                                    </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="contact-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>--}}
+                                {{--<ul class="address">--}}
+                                        <i class="fa fa-map-marker"></i> <span> Address:</span> 2400 South Avenue A<span> </span>
+                                        <i class="fa fa-phone"></i> <span> Phone:</span> +928 336 2000<span> </span>
+                                        <i class="fa fa-envelope"></i> <span> Email:</span><a href="mailto:someone@yoursite.com"> support@oxygen.com</a><span> </span>
+                                        <i class="fa fa-globe"></i> <span> Website:</span> <a href="#">www.sitename.com</a><span> </span>
+                                {{--</ul>--}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

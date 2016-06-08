@@ -34,6 +34,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" type="text/css" href="{{ asset('resources/dist/sweetalert.css') }}">
 
      <link rel="stylesheet" href="{{ asset('resources/assets/css/galery.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/donut_chart.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/assets/css/lightbox.css') }}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css" >
@@ -257,11 +258,14 @@ desired effect
                 <li><a href="{{url('/profile')}}"><i class="fa fa-user"></i> <span>My Profile</span></a></li>
                 <li><a href="{{url('/gallery/list')}}"><i class="fa fa-photo"></i> <span>My galery</span></a></li>
                     <?php }if($admin==2){ ?>
-                    <li ><a href="{{url('/home')}}"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                    <li><a href="{{url('/templates/new')}}"><i class="fa fa-desktop"></i> <span>Add Template</span></a></li>
-                    <li><a href="{{url('/templates/edit')}}"><i class="fa fa-desktop"></i> <span>Edit Template</span></a></li>
-                    <li><a href="{{url('/ad_user')}}"><i class="fa fa-television"></i> <span>Manage Users</span></a></li>
-                    <li><a href="{{url('/reports')}}"><i class="fa fa-user"></i> <span>Get Reports</span></a></li>
+                    <li ><a href="{{url('/admin/home')}}"><i class="fa fa-home"></i><span>Home</span></a></li>
+                    <li><a href="{{url('/templates/new')}}"><i class="fa fa-plus-square" aria-hidden="true"></i> <span>Add Template</span></a></li>
+                    <li><a href="{{url('/templates/edit')}}"><i class="fa fa-pencil-square" aria-hidden="true"></i><span>Edit Template</span></a></li>
+                    <li><a href="{{url('/templates/slide')}}"><i class="fa fa-picture-o" aria-hidden="true"></i> <span>Slide Show</span></a></li>
+                    <li><a href="{{url('/templates/mail/view')}}"><i class="fa fa-envelope-square" aria-hidden="true"></i> <span>Manage Mails</span></a></li>
+                    <li><a href="{{url('/admin/user/manage')}}"><i class="fa fa-users" aria-hidden="true"></i> <span>Manage Users</span></a></li>
+                    <li><a href="{{url('/reports')}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>Get Reports</span></a></li>
+                    <li><a href="{{url('/myprofile')}}"><i class="fa fa-user" aria-hidden="true"></i> <span>My Profile</span></a></li>
                     <?php }
                     ?>
             </ul><!-- /.sidebar-menu -->

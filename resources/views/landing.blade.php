@@ -292,7 +292,6 @@
             <!-- Set the first background image using inline CSS below. -->
             <div class="fill" style="background-image:url('resources/assets/img/2.jpg');"></div>
             <div class="carousel-caption">
-
                 <h2>Caption 1</h2>
             </div>
         </div>
